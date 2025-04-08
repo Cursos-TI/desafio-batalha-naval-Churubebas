@@ -5,45 +5,65 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
-    int tabuleiro[11][11]={{1,0,0,0,0,0,0,0,0,0,0},{2,0,0,0,0,0,0,0,0,0,0},{3,0,0,0,0,0,0,0,0,0,0},{4,0,0,0,0,0,0,0,0,0,0},{5,0,0,0,0,0,0,0,0,0,0},{6,0,0,0,0,0,0,0,0,0,0},{7,0,0,0,0,0,0,0,0,0,0},{8,0,0,0,0,0,0,0,0,0,0},{9,0,0,0,0,0,0,0,0,0,0},{10,0,0,0,0,0,0,0,0,0,0}};
+    int tabuleiro[10][10]={{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
     int navio1[3]={3,3,3}, navio2[3]={3,3,3};
-    int linha,coluna,x,y;
-
+    int navio=3;
+   
         printf("\tBem Vindo a Batalha Naval!\n");
         printf("\tImpressão do Tabuleiro\n");
-        printf("    A  B  C  D  F  G  H  I  J  L\n");
 
-         for (linha = 0; linha < 10; linha++)
+         for (int linha = 0; linha < 10; linha++)
             {
-               for (coluna = 0; coluna < 11; coluna++)
+               for (int coluna = 0; coluna < 10; coluna++)
                {
                 printf(" %d ", tabuleiro[linha][coluna]);
                }
                printf("\n");
             }
-                for (x = 2; x < 5; x++)
+                for (int x = 4; x < 7; x++)
                 {
-                    tabuleiro[3][x]=3;
+                    tabuleiro[3][x]=navio;
                 }
-                for (y = 5; y < 8; y++)
+
+                for (int y = 5; y < 8; y++)
                 {
-                    tabuleiro[y][8]=3;
+                    tabuleiro[y][8]=navio;
                 }
+
+                for (int i = 0; i < 3 ; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if ((i)==(j))
+                        {
+                            tabuleiro[i][j]=navio;
+                        }else
+                            continue;
+                        }
+                }
+                
+                for (int i = 7; i < 10 ; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if ((i+j)==9)
+                        {
+                            tabuleiro[i][j]=navio;
+                        }else
+                            continue;
+                        }
+                }
+
                 printf("\tImpressão dos Navios!\n");
-        printf("    A  B  C  D  F  G  H  I  J  L\n");
 
-         for (linha = 0; linha < 10; linha++)
+         for (int linha = 0; linha < 10; linha++)
             {
-               for (coluna = 0; coluna < 11; coluna++)
+               for (int coluna = 0; coluna < 10; coluna++)
                {
                 printf(" %d ", tabuleiro[linha][coluna]);
                }
                printf("\n");
             }
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
