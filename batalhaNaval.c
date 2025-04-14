@@ -1,16 +1,23 @@
-#include <stdio.h>
+#include<stdio.h> //biblioteca
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
+#define p1 5 //constantes
+#define p2 5
 
-int main() {
-    int tabuleiro[10][10]={{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
+int main(){
+
+    int tabuleiro[10][10], cone[p1][p2], cruz[p1][p2], octa[p1][p2];//variaveis
     int navio1[3]={3,3,3}, navio2[3]={3,3,3};
     int navio=3;
-   
-        printf("\tBem Vindo a Batalha Naval!\n");
-        printf("\tImpressão do Tabuleiro\n");
+
+        for (int linha = 0; linha < 10; linha++) //loop para prencher matriz tabuleiro com "0".
+        {
+            for (int coluna = 0; coluna < 10; coluna++)
+            {
+                tabuleiro[linha][coluna]=0;
+            }
+        }
+        
+        printf("\tImpressão do Tabuleiro\n"); //impressao tabuleiro 
 
          for (int linha = 0; linha < 10; linha++)
             {
@@ -20,17 +27,18 @@ int main() {
                }
                printf("\n");
             }
-                for (int x = 4; x < 7; x++)
+
+                for (int x = 4; x < 7; x++)//loop navio horizontal
                 {
                     tabuleiro[3][x]=navio;
                 }
 
-                for (int y = 5; y < 8; y++)
+                for (int y = 5; y < 8; y++)//loop navio vertical
                 {
                     tabuleiro[y][8]=navio;
                 }
 
-                for (int i = 0; i < 3 ; i++)
+                for (int i = 0; i < 3 ; i++)//loop navio diagonal 1
                 {
                     for (int j = 0; j < 10; j++)
                     {
@@ -42,7 +50,7 @@ int main() {
                         }
                 }
                 
-                for (int i = 7; i < 10 ; i++)
+                for (int i = 7; i < 10 ; i++) //loop navio diagonal 2
                 {
                     for (int j = 0; j < 10; j++)
                     {
@@ -54,7 +62,7 @@ int main() {
                         }
                 }
 
-                printf("\tImpressão dos Navios!\n");
+                printf("\tImpressão dos Navios!\n"); //impressao tabuleiro com os navios
 
          for (int linha = 0; linha < 10; linha++)
             {
@@ -64,27 +72,94 @@ int main() {
                }
                printf("\n");
             }
+        
+            for (int linha = 0; linha < 10; linha++) //zerando tabuleiro
+            {
+                for (int coluna = 0; coluna < 10; coluna++)
+                {
+                    tabuleiro[linha][coluna]=0;
+                }
+            }
+            
+            for (int i = 0; i < 5; i++) //logica poder cone
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    cone[i][j]=0;
+                    
+            if (j==2 || i==2 || (i+j)==2 || (i+j)==4)
+            {
+                cone[i][j]=1;
+            }
+            if (cone[0][4]==1)
+            {
+                cone[i][j]=0;
+            }
+                }
+            }
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+            for (int i = 0; i < 5; i++) //logica poder cruz
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    cruz[i][j]=0;
+                    if (j==2 || i==2)
+                    {
+                        cruz[i][j]=1;
+                    }
+                }
+            }
+            
+            for (int i = 0; i < 5; i++) //logica poder octaedro(diamante)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    octa[i][j]=0;
+                    if (j==2 || i==2)
+                    {
+                        octa[i][j]=1;
+                    }
+        
+                    if (octa[2][0]==1 || octa[0][2]==1 || octa[2][4]==1 || octa[4][2]==1)
+                    {
+                        octa[i][j]=0;
+                    }
+                }
+            }
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
+            for (int i = 0, x = 5; i < 5 , x < 10; i++, x++) //loops para prencher a matriz com os poderes
+            {
+                for (int j = 0, y = 1; j < 5 , y < 6; j++, y++)
+                {
+                    tabuleiro[x][y] = cruz[i][j];
+                }
+            }
+            for (int i = 0, x = 0; i < 5 , x < 5; i++, x++)
+            {
+                for (int j = 0, y = 5; j < 5 , y < 10; j++, y++)
+                {
+                    tabuleiro[x][y] = octa[i][j];
+                }
+            }
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 5; y++)
+                {
+                    tabuleiro[x][y] = cone[x][y];
+                }}
+            
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+            printf("\tImpressão das Habilidades!\n"); //impressao da matriz com os poderes
 
-    return 0;
+            for (int linha = 0; linha < 10; linha++)
+            {
+               for (int coluna = 0; coluna < 10; coluna++)
+               {
+                printf(" %d ", tabuleiro[linha][coluna]);
+               }
+               printf("\n");
+            }
+
+
+return 0;//fim do codigo
 }
